@@ -3,6 +3,8 @@
 $dischi_text = file_get_contents("./dischi.json");
 $dischi = json_decode($dischi_text, true);
 
+$generi = [ "Rock", "Rock Progressivo", "Pop", "Hip Hop", "Jazz", "Blues", "Metal", "Classica", "Reggae", "Funk", "Grunge", "Soul", "R&B", "Punk", "Electronic", "House", "Techno", "Indie", "Alternative",];
+
 ?>
 
 <!DOCTYPE html>
@@ -42,13 +44,13 @@ $dischi = json_decode($dischi_text, true);
             ?>
             <div class='col-sm-12 col-md-4 col-lg-3'>
                 <div class='card mt-4'>
-                    <img src="<?php echo $disco["url_cover"] ?>" class="card-img-top"
-                        alt="<?php echo $disco["titolo"] ?>">
+                    <img src="<?php echo $disco["url_cover"] ?>" class="card-img-top" alt="<?php $disco["titolo"] ?>">
                     <div class='card-body'>
                         <span class="badge text-bg-secondary mb-3"><?php echo $disco["genere"] ?></span>
                         <h5 class="card-title"><?php echo $disco["titolo"] ?></h5>
                         <p class="card-text"><?php echo $disco["artista"] ?></p>
-                        <p class="card-text"><small class='text-muted'><?php echo $disco["anno_pubblicazione"] ?></small></p>
+                        <p class="card-text"><small
+                                class='text-muted'><?php echo $disco["anno_pubblicazione"] ?></small></p>
                     </div>
                 </div>
             </div>
@@ -57,6 +59,44 @@ $dischi = json_decode($dischi_text, true);
             ?>
         </div>
         <!-- /Disk Cards -->
+
+        <!-- Form -->
+        <form action="" method="POST">
+            <h2 class="text-center mt-5 mb-4">Aggiungi un nuovo disco:</h2>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <label for="titolo" class="form-label">Titolo</label>
+                    <input type="text" class="form-control" id="titolo" name="titolo" placeholder="Abbey Road">
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <label for="artista" class="form-label">Artista</label>
+                    <input type="text" class="form-control" id="artista" name="artista" placeholder="The Beatles">
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <label for="url_cover" class="form-label">URL Poster</label>
+                    <input type="text" class="form-control" id="url_cover" name="url_cover"
+                        placeholder="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg">
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <label for="anno_pubblicazione" class="form-label">Anno di pubblicazione</label>
+                    <input type="text" class="form-control" id="anno_pubblicazione" name="anno_pubblicazione"
+                        placeholder="The Beatles">
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <label for="genere" class="form-label">Genere</label>
+                    <select class="form-select" id="genere" name="genere" aria-label="Default select example">
+                        <option selected>Seleziona un genere</option>
+                        <?php foreach($generi as $genere) {
+                            echo "<option value='$genere'>$genere</option>";
+                        } ?>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3 align-self-end">
+                    <button type="submit" class="btn btn-primary">Aggiungi</button>
+                </div>
+            </div>
+        </form>
+        <!-- /Form -->
     </main>
 
 </body>
